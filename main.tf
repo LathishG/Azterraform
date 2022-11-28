@@ -6,6 +6,13 @@ terraform {
       version = "~> 3.0.2"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name = "lk204_tf_rg_blobstr"
+    storage_account_name = "tfstatestorageacnt"
+    container_name = "tfstatecontainer"
+    key = "terraform.tfstate"
+  }
   required_version = ">= 1.1.0"
 }
 
