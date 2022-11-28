@@ -16,6 +16,12 @@ terraform {
   required_version = ">= 1.1.0"
 }
 
+variable "imagebuild" {
+  type        = string
+  description = "Latest image build"
+}
+
+
 provider "azurerm" {
   features {}
 }
@@ -35,7 +41,7 @@ resource "azurerm_container_group" "lkaz204acg" {
 
    container {
     name   = "myappapi"
-    image  = "lathishg/myapi"
+    image  = "lathishg/myapi:${var.imagebuild}"
     cpu    = "1"
     memory = "1"
 
