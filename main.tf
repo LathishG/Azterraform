@@ -8,10 +8,10 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name = "lk204_tf_rg_blobstr"
+    resource_group_name  = "lk204_tf_rg_blobstr"
     storage_account_name = "tfstatestorageacnt"
-    container_name = "tfstatecontainer"
-    key = "terraform.tfstate"
+    container_name       = "tfstatecontainer"
+    key                  = "terraform.tfstate"
   }
   required_version = ">= 1.1.0"
 }
@@ -32,15 +32,15 @@ resource "azurerm_resource_group" "lkaz204rg" {
 }
 
 resource "azurerm_container_group" "lkaz204acg" {
-   name = "myappapi"
-   location = azurerm_resource_group.lkaz204rg.location
-   resource_group_name = azurerm_resource_group.lkaz204rg.name
-   ip_address_type     = "Public"
-   dns_name_label      = "lathishappapi"
-   os_type             = "Linux"
+  name                = "myappapi"
+  location            = azurerm_resource_group.lkaz204rg.location
+  resource_group_name = azurerm_resource_group.lkaz204rg.name
+  ip_address_type     = "Public"
+  dns_name_label      = "lathishappapi"
+  os_type             = "Linux"
 
-   container {
-    name   = "myappapi"
+  container {
+    name   = var.apicontainer
     image  = "lathishg/myapi:${var.imagebuild}"
     cpu    = "1"
     memory = "1"
@@ -51,3 +51,4 @@ resource "azurerm_container_group" "lkaz204acg" {
     }
   }
 }
+
